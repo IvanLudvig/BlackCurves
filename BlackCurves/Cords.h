@@ -8,6 +8,7 @@ public:
 	sf::Vector2f toWorldCords(sf::Vector2f v);
 	sf::Vector2f toLocalCords(sf::Vector2f v);
 	static float radiansToDegrees(float rad);
+	static float Cords::degreesToRadians(float deg);
 	void setCenter(sf::Vector2f v);
 	float maxX();
 	float minX();

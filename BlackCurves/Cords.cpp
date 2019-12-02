@@ -33,6 +33,10 @@ float Cords::radiansToDegrees(float rad)
 {
 	return rad * 180 / (pi);
 }
+float Cords::degreesToRadians(float deg)
+{
+	return deg * pi / 180;
+}
 
 void Cords::setCenter(sf::Vector2f v)
 {

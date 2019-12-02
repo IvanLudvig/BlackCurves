@@ -12,7 +12,7 @@ int sgn(float x)
 
 Curve::Curve(float A, float B, float C, float D, float E, float F, Cords cords)
 {
-	cs = new Factors(A, B, C, D, E, F, 0, sf::Vector2f(0, 0));
+	cs = new Factors(A, B, C, D, E, F);
 	//can = cs.canonic();
 	float I3 = (A * ((C * F) - (E * E / 4))) 
 		- ((B / 2) * ((B * F / 2) - (D * E / 4))) 
@@ -44,6 +44,9 @@ Curve::Curve(float A, float B, float C, float D, float E, float F, Cords cords)
 		if (I3 != 0)
 		{
 			type = 2;
+			figure = new Hyperbola(cs);
+			build(cs, cords);
+			return;
 		}
 		else {
 			type = 6;

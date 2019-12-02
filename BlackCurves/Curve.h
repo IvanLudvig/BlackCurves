@@ -1,6 +1,7 @@
 #include "cmath"
 #include <Thor/Shapes.hpp>
 #include <Ellipse.h>
+#include <Hyperbola.h>
 #pragma once
 
 class Curve

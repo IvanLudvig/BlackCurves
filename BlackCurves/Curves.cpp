@@ -10,15 +10,18 @@ sf::Text text;
 sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
 
 //Curve curve(0, 0, -2, 5 / 2, 20 / 2, 4, cords);
-Curve curve(0.5, 0.2, 0.33, -152, -360, -27, cords); //ellipse
+//Curve curve(0.5, 0.2, 0.33, -152, -360, -27, cords); //ellipse
 //Curve curve(4, 28, 49, -3, -15, 2, cords);  //parabola
 //Curve curve(1, -2, 1, -2, -2, 1, cords);  //parabola
 //Curve curve(1, -8, 16, 6, -24, 9, cords);   //line
 //Curve curve(5, 0, -16, -6, 8, -144, cords);
 //Curve curve(9, 0, -16, -6, 8, -144, cords);
-//Curve curve(17, -9, 1, -3, -1, -3, cords);
+Curve curve(17, -9, 1, -3, -1, -3, cords);
 //Curve curve(17, -2, 1, -3, -1, -3, cords);
 //Curve curve(1, -8, 16, 6, -24, 9, cords);
+//Curve curve(5, 12, 10, -6, 4, -1, cords);
+//Curve curve(2, 6, 10, 0, 0, -121, cords);
+//Curve curve(2, -4, 5, 8, -2, 9, cords);
 
 
 void Curves::update()

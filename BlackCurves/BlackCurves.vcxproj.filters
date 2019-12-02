@@ -58,6 +58,9 @@
     <ClCompile Include="Factors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hyperbola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BlackCurves.h">
@@ -100,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Factors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hyperbola.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

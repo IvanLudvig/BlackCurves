@@ -177,6 +177,7 @@
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="Factors.cpp" />
     <ClCompile Include="Figure.cpp" />
+    <ClCompile Include="Hyperbola.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tick.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="Factors.h" />
     <ClInclude Include="Figure.h" />
+    <ClInclude Include="Hyperbola.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Tick.h" />
   </ItemGroup>
