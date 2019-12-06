@@ -4,25 +4,29 @@ Ellipse::Ellipse(Factors* factors)
 	:Figure(factors)
 {
 }
+
+float normalize(sf::Vector2f v)
+{
+	return pow(pow(v.x, 2.0f) + pow(v.y, 2.0f), 0.5f);
+}
 void Ellipse::build(Factors* factors, Cords cords)
 {
 	sf::VertexArray v1 = sf::VertexArray(sf::LinesStrip, 1001);
 	sf::VertexArray v2 = sf::VertexArray(sf::LinesStrip, 1001);
-	float rangeMin = std::min(factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
-	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x);
-	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
 
-	float rangeMax = std::max(factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
-	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x);
-	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
-	if (rangeMin > rangeMax)
+	float rangeMin = (factors->toReal(cords.toWorldCords(sf::Vector2f(cords.minX(), cords.minY())))).x;
+	float rangeMax = (factors->toReal(cords.toWorldCords(sf::Vector2f(cords.maxX(), cords.maxX())))).x;
+	rangeMax = 0;
+	rangeMin = 10000;
+	for (float x = cords.minX()*0.8f; x <= cords.maxX()*1.5f; x += (cords.maxX() - cords.minX()) / 10.0f)
 	{
-		float t = rangeMin;
-		rangeMin = rangeMax;
-		rangeMax = t;
+		for (float y = cords.minY()*0.8f; y <= cords.maxY()*1.5f; y += (cords.maxY() - cords.minY()) / 10.0f)
+		{
+			rangeMin = std::min(rangeMin, factors->toLocal((sf::Vector2f(x, y))).x);
+			rangeMax = std::max(rangeMax, factors->toLocal((sf::Vector2f(x, y))).x);
+		}
 	}
-	//rangeMax = cords.maxX();
-	//rangeMin = cords.minX();
+
 	int i = 0;
 	for (float x = rangeMin; x < rangeMax; x += (rangeMax - rangeMin) / (500.0f))
 	{
@@ -66,12 +70,5 @@ void Ellipse::build(Factors* factors, Cords cords)
 	vertex = v;
 }
 
-void Ellipse::update(Cords cords)
-{
-	build(canonic, cords);
-}
 
-void Ellipse::draw(sf::RenderWindow& window)
-{
-	window.draw(vertex);
-}
+

@@ -1,11 +1,10 @@
 #pragma once
 #include "Figure.h"
-
-class Ellipse :
+class LineFigure :
 	public Figure
 {
 public:
-	Ellipse(Factors* factors);
+	LineFigure(Factors* factors);
 	void build(Factors* factors, Cords cords) override;
 };
 

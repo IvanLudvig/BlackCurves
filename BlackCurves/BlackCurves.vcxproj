@@ -179,7 +179,9 @@
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Hyperbola.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LineFigure.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Parabola.cpp" />
     <ClCompile Include="Tick.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +203,8 @@
     <ClInclude Include="Figure.h" />
     <ClInclude Include="Hyperbola.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="LineFigure.h" />
+    <ClInclude Include="Parabola.h" />
     <ClInclude Include="Tick.h" />
   </ItemGroup>
   <ItemGroup>

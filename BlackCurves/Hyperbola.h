@@ -8,6 +8,5 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	Hyperbola(Factors* factors);
 	void build(Factors* factors, Cords cords) override;
-	void update(Cords cords) override;
 };
 

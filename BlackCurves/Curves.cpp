@@ -3,6 +3,7 @@
 #include "Axis.h"
 #include "Cords.h"
 #include "Curves.h"
+#include "LineFigure.h"
 
 Cords cords = Cords();
 Axis axis(cords);
@@ -14,21 +15,23 @@ sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
 //Curve curve(4, 28, 49, -3, -15, 2, cords);  //parabola
 //Curve curve(1, -2, 1, -2, -2, 1, cords);  //parabola
 //Curve curve(1, -8, 16, 6, -24, 9, cords);   //line
+Curve curve(225, -240, 64, 30, -16, 1, cords);   //line
+//Curve curve(25, 0, 0, -30, 0, 9, cords);   //line
+//Curve curve(0, 0, 0, 15, -8, 1, cords);   //line
+//Curve curve(81, -36, 4, 0, 0, 0, cords);   //2 p lines
 //Curve curve(5, 0, -16, -6, 8, -144, cords);
 //Curve curve(9, 0, -16, -6, 8, -144, cords);
-Curve curve(17, -9, 1, -3, -1, -3, cords);
+//Curve curve(17, -9, 1, -3, -1, -3, cords);
 //Curve curve(17, -2, 1, -3, -1, -3, cords);
 //Curve curve(1, -8, 16, 6, -24, 9, cords);
-//Curve curve(5, 12, 10, -6, 4, -1, cords);
+//Curve curve(5, 12, 10, -6, 4, -1, cords);  //ellipse
 //Curve curve(2, 6, 10, 0, 0, -121, cords);
 //Curve curve(2, -4, 5, 8, -2, 9, cords);
 
 
 void Curves::update()
 {
-	std::cout << "Delta " << cords.maxX() << ", " << cords.minX() << std::endl;
 	cords.scale = 800 / ((cords.maxX() - cords.minX()) * cords.zoom);
-
 	curve.update(cords);
 	axis.update(cords);
 }
@@ -54,25 +57,6 @@ void Curves::init()
 	window.setView(view);
 	//window.close();
 
-#define PI 3.1415926535898
-
-	float radius_x = 100;
-	float radius_y = 150;
-	unsigned short quality = 71;
-
-	sf::ConvexShape ellipse;
-	ellipse.setPointCount(quality);
-	ellipse.setFillColor(sf::Color::White);
-	ellipse.setOutlineThickness(1);
-	ellipse.setOutlineColor(sf::Color::Black);
-
-	for (unsigned short i = 0; i < quality; ++i) {
-		float rad = ((360 / quality) * i) / (360 / PI / 2);
-		float x = cos(rad) * radius_x;
-		float y = sin(rad) * radius_y;
-
-		ellipse.setPoint(i, sf::Vector2f(x, y));
-	};
 
 	while (window.isOpen())
 	{
@@ -122,7 +106,7 @@ void Curves::init()
 				{
 					cords.zoom = std::max(.05f, cords.zoom - (cords.zoom / 10));
 				}
-				cords.center = cords.toLocalCords(view.getCenter());
+				cords.setCenter(view.getCenter());
 				update();
 				break;
 			}

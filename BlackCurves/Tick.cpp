@@ -23,7 +23,7 @@ Tick::Tick(sf::Vector2f val, Cords cords, sf::Font& font)
 		stream << std::fixed << std::setprecision(1) << val.x;
 		std::string s = stream.str();
 		text.setString(s);
-		line = thor::Shapes::line(sf::Vector2f(1.0f, 10.0f), sf::Color::Magenta, 1.0f);
+		line = thor::Shapes::line(sf::Vector2f(0.0f, 10.0f), sf::Color::Magenta, 1.0f);
 		//line.setPosition(cords.toWorldCords(sf::Vector2f(val.x, val.y - (5 / cords.scale))));
 		line.setPosition((val.x * cords.scale * cords.zoom), (val.y * cords.scale * cords.zoom) - 5);
 		//text.setPosition((val.x*scale)-(text.getGlobalBounds().width/4)-center.x, (val.y*scale)-5-center.y);

@@ -23,6 +23,8 @@ void Hyperbola::build(Factors* factors, Cords cords)
 	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
 
 	float rangeMax = std::max(factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
+	//rangeMax = (factors->toReal((sf::Vector2f(cords.maxX(), cords.maxY())))).x;
+	//rangeMin = (factors->toReal((sf::Vector2f(cords.minX(), cords.minY())))).x;
 	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x);
 	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
 	if (rangeMin > rangeMax)
@@ -90,10 +92,6 @@ void Hyperbola::build(Factors* factors, Cords cords)
 	vertex1 = v;
 }
 
-void Hyperbola::update(Cords cords)
-{
-	build(canonic, cords);
-}
 
 void Hyperbola::draw(sf::RenderWindow& window)
 {

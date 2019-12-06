@@ -61,6 +61,12 @@
     <ClCompile Include="Hyperbola.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Parabola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineFigure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BlackCurves.h">
@@ -106,6 +112,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hyperbola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parabola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LineFigure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
