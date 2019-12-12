@@ -8,21 +8,16 @@ void Parabola::build(Factors* factors, Cords cords)
 {
 	sf::VertexArray v1 = sf::VertexArray(sf::LinesStrip, 1001);
 	sf::VertexArray v2 = sf::VertexArray(sf::LinesStrip, 1001);
-	float rangeMin = std::min(factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
-	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x);
-	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
-
-	float rangeMax = std::max(factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
-	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x);
-	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
-	if (rangeMin > rangeMax)
+	float rangeMax = 0;
+	float rangeMin = LLONG_MAX;
+	for (float x = cords.minX() - abs(cords.minX()/5); x <= cords.maxX()+ abs(cords.maxX() / 5); x += (cords.maxX() - cords.minX()) / 10.0f)
 	{
-		float t = rangeMin;
-		rangeMin = rangeMax;
-		rangeMax = t;
+		for (float y = cords.minY() - abs(cords.minY() / 5); y <= cords.maxY() + abs(cords.maxY() / 5); y += (cords.maxY() - cords.minY()) / 10.0f)
+		{
+			rangeMin = std::min(rangeMin, factors->toLocal((sf::Vector2f(x, y))).x);
+			rangeMax = std::max(rangeMax, factors->toLocal((sf::Vector2f(x, y))).x);
+		}
 	}
-	//rangeMax = cords.maxX();
-	//rangeMin = cords.minX();
 	int i = 0;
 	for (float x = rangeMin; x < rangeMax; x += (rangeMax - rangeMin) / (500.0f))
 	{

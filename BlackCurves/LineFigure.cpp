@@ -10,10 +10,8 @@ void LineFigure::build(Factors* factors, Cords cords)
 	vertex = sf::VertexArray(sf::LinesStrip, 2);
 	float k = -canonic->E / canonic->D;
 	float b = canonic->F / canonic->E;
-	float rangeMin = (factors->toReal(cords.toWorldCords(sf::Vector2f(cords.minX(), cords.minY())))).x;
-	float rangeMax = (factors->toReal(cords.toWorldCords(sf::Vector2f(cords.maxX(), cords.maxX())))).x;
-	rangeMax = 0;
-	rangeMin = 10000;
+	float rangeMax = 0;
+	float rangeMin = LLONG_MAX;
 	for (float x = cords.minX() * 0.8f; x <= cords.maxX() * 1.5f; x += (cords.maxX() - cords.minX()) / 10.0f)
 	{
 		for (float y = cords.minY() * 0.8f; y <= cords.maxY() * 1.5f; y += (cords.maxY() - cords.minY()) / 10.0f)

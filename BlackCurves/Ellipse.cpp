@@ -14,13 +14,11 @@ void Ellipse::build(Factors* factors, Cords cords)
 	sf::VertexArray v1 = sf::VertexArray(sf::LinesStrip, 1001);
 	sf::VertexArray v2 = sf::VertexArray(sf::LinesStrip, 1001);
 
-	float rangeMin = (factors->toReal(cords.toWorldCords(sf::Vector2f(cords.minX(), cords.minY())))).x;
-	float rangeMax = (factors->toReal(cords.toWorldCords(sf::Vector2f(cords.maxX(), cords.maxX())))).x;
-	rangeMax = 0;
-	rangeMin = 10000;
-	for (float x = cords.minX()*0.8f; x <= cords.maxX()*1.5f; x += (cords.maxX() - cords.minX()) / 10.0f)
+	float rangeMax = 0;
+	float rangeMin = LLONG_MAX;
+	for (float x = cords.minX() - abs(cords.minX() / 5); x <= cords.maxX() + abs(cords.maxX() / 5); x += (cords.maxX() - cords.minX()) / 10.0f)
 	{
-		for (float y = cords.minY()*0.8f; y <= cords.maxY()*1.5f; y += (cords.maxY() - cords.minY()) / 10.0f)
+		for (float y = cords.minY() - abs(cords.minY() / 5); y <= cords.maxY() + abs(cords.maxY() / 5); y += (cords.maxY() - cords.minY()) / 10.0f)
 		{
 			rangeMin = std::min(rangeMin, factors->toLocal((sf::Vector2f(x, y))).x);
 			rangeMax = std::max(rangeMax, factors->toLocal((sf::Vector2f(x, y))).x);

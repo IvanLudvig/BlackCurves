@@ -16,17 +16,17 @@ void Hyperbola::build(Factors* factors, Cords cords)
 	int t = 0;
 	int k = 0;
 
-	//CORDS.TOWORLD??
 
-	float rangeMin = std::min(factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
-	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x);
-	rangeMin = std::min(rangeMin, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
-
-	float rangeMax = std::max(factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).x, factors->toReal(sf::Vector2f(cords.maxX(), cords.maxY())).y);
-	//rangeMax = (factors->toReal((sf::Vector2f(cords.maxX(), cords.maxY())))).x;
-	//rangeMin = (factors->toReal((sf::Vector2f(cords.minX(), cords.minY())))).x;
-	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).x);
-	rangeMax = std::max(rangeMax, factors->toReal(sf::Vector2f(cords.minX(), cords.minY())).y);
+	float rangeMax = 0;
+	float rangeMin = LLONG_MAX;
+	for (float x = cords.minX() - abs(cords.minX() / 5); x <= cords.maxX() + abs(cords.maxX() / 5); x += (cords.maxX() - cords.minX()) / 10.0f)
+	{
+		for (float y = cords.minY() - abs(cords.minY() / 5); y <= cords.maxY() + abs(cords.maxY() / 5); y += (cords.maxY() - cords.minY()) / 10.0f)
+		{
+			rangeMin = std::min(rangeMin, factors->toLocal((sf::Vector2f(x, y))).x);
+			rangeMax = std::max(rangeMax, factors->toLocal((sf::Vector2f(x, y))).x);
+		}
+	}
 	if (rangeMin > rangeMax)
 	{
 		float t = rangeMin;

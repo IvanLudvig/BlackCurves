@@ -1,21 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include "Curve.h"
-#include "Axis.h"
-#include "Cords.h"
 #include "Curves.h"
-#include "LineFigure.h"
 
-Cords cords = Cords();
-Axis axis(cords);
-sf::Text text;
-sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
+
 
 //Curve curve(0, 0, -2, 5 / 2, 20 / 2, 4, cords);
 //Curve curve(0.5, 0.2, 0.33, -152, -360, -27, cords); //ellipse
 //Curve curve(4, 28, 49, -3, -15, 2, cords);  //parabola
 //Curve curve(1, -2, 1, -2, -2, 1, cords);  //parabola
 //Curve curve(1, -8, 16, 6, -24, 9, cords);   //line
-Curve curve(225, -240, 64, 30, -16, 1, cords);   //line
+//Curve curve(225, -240, 64, 30, -16, 1, cords);   //line
 //Curve curve(25, 0, 0, -30, 0, 9, cords);   //line
 //Curve curve(0, 0, 0, 15, -8, 1, cords);   //line
 //Curve curve(81, -36, 4, 0, 0, 0, cords);   //2 p lines
@@ -29,22 +22,26 @@ Curve curve(225, -240, 64, 30, -16, 1, cords);   //line
 //Curve curve(2, -4, 5, 8, -2, 9, cords);
 
 
-void Curves::update()
+Curves::Curves()
 {
-	cords.scale = 800 / ((cords.maxX() - cords.minX()) * cords.zoom);
-	curve.update(cords);
-	axis.update(cords);
+	cords = new Cords();
+	axis = new Axis(*cords);
 }
 
-void Curves::init()
+void Curves::update()
 {
-	//curve = Curve(4, 28, 49, -3, -15, 2, cords);
+	cords->scale = 800 / ((cords->maxX() - cords->minX()) * cords->zoom);
+	curve->update(*cords);
+	axis->update(*cords);
+}
+
+void Curves::init(float A, float B, float C, float D, float E, float F)
+{
+	sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
+	curve = new Curve(A, B, C, D, E, F, *cords);
 	sf::Font font;
 	font.loadFromFile("consolas.ttf");
-	text.setFont(font);
-	text.setString("TYPE: " + std::to_string(curve.type));
-	text.setPosition(100, 100);
-	text.setColor(sf::Color::Black);
+
 	sf::Vector2f oldPos;
 	bool moving = false;
 
@@ -56,6 +53,7 @@ void Curves::init()
 	view.setCenter(0, 0);
 	window.setView(view);
 	//window.close();
+	update();
 
 
 	while (window.isOpen())
@@ -91,7 +89,7 @@ void Curves::init()
 				view.setCenter(view.getCenter() + deltaPos);
 				window.setView(view);
 
-				cords.setCenter(view.getCenter());
+				cords->setCenter(view.getCenter());
 				update();
 				break;
 			}
@@ -100,13 +98,13 @@ void Curves::init()
 					break;
 				if (event.mouseWheelScroll.delta <= -1)
 				{
-					cords.zoom = std::min(15.0f, cords.zoom + (cords.zoom / 10));
+					cords->zoom = std::min(15.0f, cords->zoom + (cords->zoom / 10));
 				}
 				else if (event.mouseWheelScroll.delta >= 1)
 				{
-					cords.zoom = std::max(.05f, cords.zoom - (cords.zoom / 10));
+					cords->zoom = std::max(.05f, cords->zoom - (cords->zoom / 10));
 				}
-				cords.setCenter(view.getCenter());
+				cords->setCenter(view.getCenter());
 				update();
 				break;
 			}
@@ -119,9 +117,9 @@ void Curves::init()
 		line[1].color = sf::Color(100, 0, 200);
 
 		window.clear(sf::Color::White);
-		axis.draw(window);
+		axis->draw(window);
 		//window.draw(ellipse);
-		curve.draw(window);
+		curve->draw(window);
 		//window.draw(text);
 		window.display();
 	}
@@ -129,7 +127,7 @@ void Curves::init()
 
 int Curves::getType()
 {
-	return curve.getType();
+	return curve->getType();
 }
 
 

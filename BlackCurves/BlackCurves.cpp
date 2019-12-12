@@ -4,19 +4,14 @@
 BlackCurves::BlackCurves(QWidget *parent)
 	: QMainWindow(parent)
 {
-
 	ui.setupUi(this);
-	QWidget* widget = new QWidget;
-	//QSpinBox* spinboxx = new QSpinBox();
-	//QSlider* slider = new QSlider(Qt::Horizontal);
-	QLineEdit* fields[7];
-	QLabel* labels[7];
-	label = new QLabel("");
+	widget = new QWidget;
+	label = new QLabel("Description", this);
 	for (int i = 0; i < 6; i++)
 	{
-		fields[i] = new QLineEdit();
+		fields[i] = new QLineEdit("1");
 		fields[i]->setFixedWidth(50);
-		fields[i]->setValidator(new QRegExpValidator(QRegExp("[0-9]*")));
+		fields[i]->setValidator(new QRegExpValidator(QRegExp("[+-]?([0-9]*[.])?[0-9]+")));
 		labels[i] = new QLabel();
 	}
 	labels[0]->setText("x^2 + ");
@@ -28,7 +23,7 @@ BlackCurves::BlackCurves(QWidget *parent)
 
 	QFont font = labels[0]->font();
 	font.setPointSizeF(14);
-	QGridLayout* layout = new QGridLayout;
+	layout = new QGridLayout();
 	for (int i = 0; i < 6; i++)
 	{
 		fields[i]->setFont(font);
@@ -36,13 +31,36 @@ BlackCurves::BlackCurves(QWidget *parent)
 		layout->addWidget(fields[i], 0, 2*i);
 		layout->addWidget(labels[i], 0, 2*i + 1);
 	}
-	QPushButton* run = new QPushButton("Run");
-	layout->addWidget(run, 1, 5);
+	run = new QPushButton("Run", this);
+	layout->addWidget(run, 0, 12);
 	label->setFont(font);
-	layout->addWidget(label, 2, 2);
+	layout->addWidget(label, 1, 13);
 	widget->setLayout(layout);
 
 	setWindowTitle("BlackCurves");
 	setCentralWidget(widget);
 	show();
+
+	connect(run, SIGNAL(clicked()), this, SLOT(handleButton()));
+}
+
+
+void BlackCurves::handleButton()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		if (fields[i]->text().isEmpty())
+		{
+			label->setText("invalid arguments");
+			return;
+		}
+	}
+	curves = new Curves();
+	curves->init(fields[0]->text().toFloat(), fields[1]->text().toFloat(), fields[2]->text().toFloat(),
+		fields[3]->text().toFloat(), fields[4]->text().toFloat(), fields[5]->text().toFloat());
+	this->label->setText(""+(curves->getType()));
+	run->setText("Example");
+	ui.centralWidget.
+	// resize button
+	//run->resize(100, 100);
 }

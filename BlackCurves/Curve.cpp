@@ -113,13 +113,17 @@ Curve::Curve(int a, int b, int type)
 
 void Curve::draw(sf::RenderWindow& window)
 {
-	figure->draw(window);
+	if ((type == 1) || (type == 2) || (type == 3)) {
+		figure->draw(window);
+	}
 }
 
 
 void Curve::update(Cords cords)
 {
-	figure->update(cords);
+	if ((type == 1) || (type == 2) || (type == 3)) {
+		figure->update(cords);
+	}
 }
 
 int Curve::getType()
