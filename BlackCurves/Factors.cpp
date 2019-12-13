@@ -150,18 +150,17 @@ Factors* Factors::toCanonic()
 		}
 	}*/
 
-	/*
 	if (F != 0)
 	{
-		A = A / F;
-		B = B / F;
-		C = C / F;
-		D = D / F;
-		E = E / F;
+		A = A / -F;
+		B = B / -F;
+		C = C / -F;
+		D = D / -F;
+		E = E / -F;
 
-		F = 1;
+		F = -1;
 	}
-	*/
+
 	return new Factors(A, B, C, D, E, F, angle, angle1, center);
 }
 
@@ -173,4 +172,36 @@ sf::Vector2f Factors::toReal(sf::Vector2f v)
 sf::Vector2f Factors::toLocal(sf::Vector2f v)
 {
 	return transform.getInverse().transformPoint(v);
+}
+
+std::string Factors::formatFloat(float n)
+{
+	std::stringstream ss;
+	ss << std::fixed << std::setprecision(2) << n;
+	std::string s = ss.str();
+	return s;
+}
+
+std::string Factors::formatFloatwithSign(float n)
+{
+	std::stringstream ss;
+	ss << std::fixed << std::setprecision(2) << fabs(n);
+	std::string s = n > 0 ? "+ " : "- ";
+	s += ss.str();
+	return s;
+}
+
+std::string Factors::getCanonicalDescription()
+{
+	std::setw(2);
+	std::setprecision(5);
+	std::string description = "";
+	description += "Canonical equation: ";
+	description += A==0? "" : formatFloat(A)+" x^2  ";
+	description += B==0? "" : formatFloatwithSign(B)+" xy ";
+	description += C==0? "" : formatFloatwithSign(C)+" y^2 ";
+	description += D==0? "" : formatFloatwithSign(D)+" x ";
+	description += E==0? "" : formatFloatwithSign(E)+" y ";
+	description += F==0? "" : " = "+ formatFloat(-F);
+	return description;
 }

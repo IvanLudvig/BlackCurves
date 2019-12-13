@@ -22,10 +22,11 @@
 //Curve curve(2, -4, 5, 8, -2, 9, cords);
 
 
-Curves::Curves()
+Curves::Curves(float A, float B, float C, float D, float E, float F)
 {
 	cords = new Cords();
 	axis = new Axis(*cords);
+	curve = new Curve(A, B, C, D, E, F, *cords);
 }
 
 void Curves::update()
@@ -35,16 +36,9 @@ void Curves::update()
 	axis->update(*cords);
 }
 
-void Curves::init(float A, float B, float C, float D, float E, float F)
+void Curves::open()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
-	curve = new Curve(A, B, C, D, E, F, *cords);
-	sf::Font font;
-	font.loadFromFile("consolas.ttf");
-
-	sf::Vector2f oldPos;
-	bool moving = false;
-
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(60);
 
@@ -52,10 +46,10 @@ void Curves::init(float A, float B, float C, float D, float E, float F)
 	view.setSize(800, -480);
 	view.setCenter(0, 0);
 	window.setView(view);
-	//window.close();
 	update();
 
-
+	sf::Vector2f oldPos;
+	bool moving = false;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -125,9 +119,9 @@ void Curves::init(float A, float B, float C, float D, float E, float F)
 	}
 }
 
-int Curves::getType()
+std::string Curves::getDescription()
 {
-	return curve->getType();
+	return (curve->getDescription());
 }
 
 

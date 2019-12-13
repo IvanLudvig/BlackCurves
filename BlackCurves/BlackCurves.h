@@ -19,7 +19,6 @@ private slots:
 	void handleButton();
 
 private:
-	Curves* curves;
 	Ui::BlackCurvesClass ui;
 	QPushButton* run;
 	QLineEdit* fields[7];

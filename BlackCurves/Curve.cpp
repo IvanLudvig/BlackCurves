@@ -21,22 +21,36 @@ Curve::Curve(float A, float B, float C, float D, float E, float F, Cords cords)
 	float I1 = A + C;
 	float K = (A * F) - (D * D / 4) + (C * F) - (E * E / 4);
 
+	/*
+TYPE:
+1 - ellipse
+2 - hyperbola
+3 - parabola
+4 - unreal ellipse (nothing)
+5 - point (pair of unreal intersecting lines)
+6 - intersecting lines
+7 - parallel lines
+8 - line
+9 - pair of unreal parallel lines
+*/
+
 	if (I2 > 0)
 	{
 		if ((I1 * I3) < 0)
 		{
 			type = 1;
 			figure = new Ellipse(cs);
-			//build(cs, cords);
-			return;
+			stype = "Ellipse";
 		}
 		else if (I1 == 0)
 		{
 			type = 5;
+			stype = "Pair of unreal intersecting lines (point)";
 		}
 		else
 		{
 			type = 4;
+			stype = "Unreal ellipse (nothing)";
 		}
 	}
 	else if (I2 < 0)
@@ -45,11 +59,11 @@ Curve::Curve(float A, float B, float C, float D, float E, float F, Cords cords)
 		{
 			type = 2;
 			figure = new Hyperbola(cs);
-			//build(cs, cords);
-			return;
+			stype = "Hyperbola";
 		}
 		else {
 			type = 6;
+			stype = "Pair of intersecting lines";
 		}
 	}
 	else {
@@ -57,54 +71,26 @@ Curve::Curve(float A, float B, float C, float D, float E, float F, Cords cords)
 		{
 			type = 3;
 			figure = new Parabola(cs);
-			//build(cs, cords);
-			return;
+			stype = "Parabola";
 		}
 		else {
 			if (K > 0)
 			{
 				type = 9;
+				stype = "Pair of unreal parallel lines";
 			}
 			else if (K < 0)
 			{
 				type = 7;
+				stype = "Pair of parallel lines";
 			}
 			else {
 				type = 8;
 				figure = new LineFigure(cs);
-				//build(cs, cords);
-				return;
+				stype = "Line";
 			}
 		}
 	}
-
-	if ((A == 0) && (B == 0) && (C == 0))
-	{
-		//type = 0;
-		float k = D / E;
-		float b = -F * 2 / E;
-		std::cout << k << " " << b << std::endl;
-		//fig = Line(k, b, 1.5f);
-		sf::VertexArray v = sf::VertexArray(sf::LinesStrip, 2);
-		v[0].position = sf::Vector2f(800, k * 800);
-		v[1].position = sf::Vector2f(-800, -k * 800);
-		v[0].color = sf::Color::Black;
-		v[1].color = sf::Color::Black;
-		//l.init(v);
-	}
-	else if ((A * C) > 0)
-	{
-		//type = 1;
-	}
-	else if ((A * C) < 0)
-	{
-		//type = 2;
-	}
-	else
-	{
-		//type = 3;
-	}
-	//build(cs, cords);
 }
 
 Curve::Curve(int a, int b, int type)
@@ -126,9 +112,14 @@ void Curve::update(Cords cords)
 	}
 }
 
-int Curve::getType()
+std::string Curve::getDescription()
 {
-	return type;
+	std::string description = "";
+	description += "Type: " + stype +"\n";
+	if ((type == 1) || (type == 2) || (type == 3)) {
+		description += figure->canonic->getCanonicalDescription();
+	}
+	return description;
 }
 
 

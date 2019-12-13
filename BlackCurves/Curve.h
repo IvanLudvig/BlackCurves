@@ -4,6 +4,7 @@
 #include <Hyperbola.h>
 #include <Parabola.h>
 #include <LineFigure.h>
+#include <string.h>
 #pragma once
 
 class Curve
@@ -25,12 +26,13 @@ public:
 	Curve(int a, int b, int type);
 	void draw(sf::RenderWindow& window);
 	void update(Cords cords);
-	int getType();
-	int type = 0;
+	std::string getDescription();
 
 private:
 	sf::ConvexShape fig;
 	sf::VertexArray vert1, vert2;
+	int type;
+	std::string stype;
 	Factors* cs;
 	Figure* figure;
 };

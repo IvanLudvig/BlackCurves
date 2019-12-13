@@ -34,7 +34,7 @@ BlackCurves::BlackCurves(QWidget *parent)
 	run = new QPushButton("Run", this);
 	layout->addWidget(run, 0, 12);
 	label->setFont(font);
-	layout->addWidget(label, 1, 13);
+	layout->addWidget(label, 1, 0, 1, 12);
 	widget->setLayout(layout);
 
 	setWindowTitle("BlackCurves");
@@ -55,12 +55,14 @@ void BlackCurves::handleButton()
 			return;
 		}
 	}
-	curves = new Curves();
-	curves->init(fields[0]->text().toFloat(), fields[1]->text().toFloat(), fields[2]->text().toFloat(),
+
+	this->label->setText("hey");
+	this->run->setText("Example");
+
+	Curves curves(fields[0]->text().toFloat(), fields[1]->text().toFloat(), fields[2]->text().toFloat(),
 		fields[3]->text().toFloat(), fields[4]->text().toFloat(), fields[5]->text().toFloat());
-	this->label->setText(""+(curves->getType()));
-	run->setText("Example");
-	ui.centralWidget.
+	label->setText(QString::fromStdString(curves.getDescription()));
 	// resize button
 	//run->resize(100, 100);
+	curves.open();
 }

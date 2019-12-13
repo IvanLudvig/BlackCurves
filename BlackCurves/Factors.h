@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "Cords.h"
 #include <cmath>
+#include <string>
+#include <iomanip>
+#include <sstream>
 
 class Factors
 {
@@ -15,5 +18,9 @@ public:
 	Factors* toCanonic();
 	sf::Vector2f toReal(sf::Vector2f v);
 	sf::Vector2f toLocal(sf::Vector2f v);
+	std::string getCanonicalDescription();
+private:
+	std::string formatFloat(float n);
+	std::string formatFloatwithSign(float n);
 };
 
