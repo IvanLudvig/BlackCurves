@@ -38,6 +38,9 @@ void Curves::update()
 
 void Curves::open()
 {
+	if ((curve->getType() != 1) && (curve->getType() != 2) && (curve->getType() != 3)) {
+		return;
+	}
 	sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(60);

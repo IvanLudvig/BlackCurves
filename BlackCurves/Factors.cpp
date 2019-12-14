@@ -182,26 +182,51 @@ std::string Factors::formatFloat(float n)
 	return s;
 }
 
+std::string Factors::floatSign(float n)
+{
+	return n >= 0 ? "+" : "-";
+}
+
+std::string Factors::formatVector(sf::Vector2f v)
+{
+	return "("+formatFloat(v.x)+", "+formatFloat(v.y)+")";
+}
+
 std::string Factors::formatFloatwithSign(float n)
 {
 	std::stringstream ss;
 	ss << std::fixed << std::setprecision(2) << fabs(n);
-	std::string s = n > 0 ? "+ " : "- ";
+	std::string s = floatSign(n);
 	s += ss.str();
 	return s;
 }
 
-std::string Factors::getCanonicalDescription()
+std::string Factors::getCanonicalDescription(int type)
 {
 	std::setw(2);
 	std::setprecision(5);
 	std::string description = "";
+
+	if((type==1)||(type==2))
+	{
+		description += " x^2/" + formatFloat(1 / A) + " ";
+		description += floatSign(1 / C) + " y^2/" + formatFloat(abs(1 / C)) + " ";
+		description += "= " + formatFloat(-F);
+	}
+	else if(type==3)
+	{
+		description += "y = ";
+		description += "2*" + formatFloat(-D / 2) + " x\n";
+	}
+	
+	/*
 	description += "Canonical equation: ";
-	description += A==0? "" : formatFloat(A)+" x^2  ";
+	description += A==0? "" : formatFloat(A)+" x^2/  ";
 	description += B==0? "" : formatFloatwithSign(B)+" xy ";
 	description += C==0? "" : formatFloatwithSign(C)+" y^2 ";
 	description += D==0? "" : formatFloatwithSign(D)+" x ";
 	description += E==0? "" : formatFloatwithSign(E)+" y ";
 	description += F==0? "" : " = "+ formatFloat(-F);
+	*/
 	return description;
 }

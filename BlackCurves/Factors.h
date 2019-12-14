@@ -18,9 +18,10 @@ public:
 	Factors* toCanonic();
 	sf::Vector2f toReal(sf::Vector2f v);
 	sf::Vector2f toLocal(sf::Vector2f v);
-	std::string getCanonicalDescription();
-private:
+	std::string getCanonicalDescription(int type);
 	std::string formatFloat(float n);
+	std::string formatVector(sf::Vector2f v);
+	std::string floatSign(float n);
 	std::string formatFloatwithSign(float n);
 };
 

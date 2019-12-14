@@ -7,5 +7,6 @@ class Ellipse :
 public:
 	Ellipse(Factors* factors);
 	void build(Factors* factors, Cords cords) override;
+	std::string getDescription() override;
 };
 

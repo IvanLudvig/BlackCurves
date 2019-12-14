@@ -55,7 +55,8 @@ void Ellipse::build(Factors* factors, Cords cords)
 		v[j + i] = v2[i - j - 1];
 		//v[j + i].color = sf::Color::Black;
 	}
-	if (abs(v1[0].position.y - v[(2 * i) - 1].position.y) < 10)
+	if (pow(pow(abs(v1[0].position.y - v[(2 * i) - 1].position.y), 2)+ pow(abs(v1[0].position.x - v[(2 * i) - 1].position.x), 0.5), 2) < 
+		((cords.maxX()-cords.maxX())/10))
 	{
 		v[2 * i] = v1[0];
 	}
@@ -66,6 +67,23 @@ void Ellipse::build(Factors* factors, Cords cords)
 	v[(2 * i)] = v1[0];
 	vertex = sf::VertexArray(sf::LinesStrip, 2001);
 	vertex = v;
+}
+
+std::string Ellipse::getDescription()
+{
+	std::string s = "";
+	sf::Vector2f center = canonic->toReal(sf::Vector2f(0, 0));
+	float c = pow((1/canonic->C) + (1/canonic->A), 0.5);
+	s += "a = " + factors->formatFloat(pow((1 / canonic->A), 0.5)) +
+		"\nb = " + factors->formatFloat(pow((1 / canonic->C), 0.5)) +
+		"\nc = " + factors->formatFloat(c) +
+		"\ne = " + factors->formatFloat(c / pow(canonic->A, 0.5)) +
+		"\n";
+	s += "Center: " + factors->formatVector(center) + "\n";
+	sf::Vector2f f1 = canonic->toReal(sf::Vector2f(c, 0));
+	sf::Vector2f f2 = canonic->toReal(sf::Vector2f(-c, 0));
+	s += "Focal points: " + factors->formatVector(f1) + ", " + factors->formatVector(f2) + "\n";
+	return s;
 }
 
 

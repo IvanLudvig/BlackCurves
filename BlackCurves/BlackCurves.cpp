@@ -6,7 +6,7 @@ BlackCurves::BlackCurves(QWidget *parent)
 {
 	ui.setupUi(this);
 	widget = new QWidget;
-	label = new QLabel("Description", this);
+	label = new QLabel("", this);
 	for (int i = 0; i < 6; i++)
 	{
 		fields[i] = new QLineEdit("1");
@@ -55,9 +55,6 @@ void BlackCurves::handleButton()
 			return;
 		}
 	}
-
-	this->label->setText("hey");
-	this->run->setText("Example");
 
 	Curves curves(fields[0]->text().toFloat(), fields[1]->text().toFloat(), fields[2]->text().toFloat(),
 		fields[3]->text().toFloat(), fields[4]->text().toFloat(), fields[5]->text().toFloat());

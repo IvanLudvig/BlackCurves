@@ -38,4 +38,9 @@ void LineFigure::build(Factors* factors, Cords cords)
 	vertex[1].color = sf::Color::Black;
 }
 
+std::string LineFigure::getDescription()
+{
+	return "a";
+}
+
 

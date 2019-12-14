@@ -27,6 +27,7 @@ public:
 	void draw(sf::RenderWindow& window);
 	void update(Cords cords);
 	std::string getDescription();
+	int getType();
 
 private:
 	sf::ConvexShape fig;

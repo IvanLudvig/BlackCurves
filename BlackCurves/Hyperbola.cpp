@@ -92,6 +92,26 @@ void Hyperbola::build(Factors* factors, Cords cords)
 	vertex1 = v;
 }
 
+std::string Hyperbola::getDescription()
+{
+	std::string s = "";
+	sf::Vector2f center = canonic->toReal(sf::Vector2f(0, 0));
+	float c = pow(pow(1/canonic->C, 2) + pow(1/canonic->A, 2), 0.5);
+	s += "a = " + factors->formatFloat(pow((1 / canonic->A), 0.5)) +
+		"\nb = " + factors->formatFloat(pow((1 / canonic->C), 0.5)) +
+		"\nc = " + factors->formatFloat(c) +
+		"\ne = " + factors->formatFloat(c / pow(canonic->A, 0.5)) +
+		"\n";
+	s += "Center: " + factors->formatVector(center) + "\n";
+	sf::Vector2f v1 = canonic->toReal(sf::Vector2f(pow(canonic->A, 0.5), 0));
+	sf::Vector2f v2 = canonic->toReal(sf::Vector2f(-pow(canonic->A, 0.5), 0));
+	s += "Vertices: " + factors->formatVector(v1) + ", " + factors->formatVector(v2) + "\n";
+	sf::Vector2f f1 = canonic->toReal(sf::Vector2f(c, 0));
+	sf::Vector2f f2 = canonic->toReal(sf::Vector2f(-c, 0));
+	s += "Focal points: " + factors->formatVector(f1) + ", " + factors->formatVector(f2) + "\n";
+	return s;
+}
+
 
 void Hyperbola::draw(sf::RenderWindow& window)
 {

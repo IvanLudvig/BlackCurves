@@ -53,3 +53,17 @@ void Parabola::build(Factors* factors, Cords cords)
 	vertex = v;
 }
 
+std::string Parabola::getDescription()
+{
+	std::string s = "";
+	float c = pow(pow(canonic->C, 2) + pow(canonic->A, 2), 0.5);
+	s += "p = " + factors->formatFloat(canonic->D/2) +
+		"\ne = " + "1" +
+		"\n";
+	sf::Vector2f v1 = canonic->toReal(sf::Vector2f(0, 0));
+	s += "Vertex: " + factors->formatVector(v1) + "\n";
+	sf::Vector2f f1 = canonic->toReal(sf::Vector2f(canonic->D/4, 0));
+	s += "Focal point: " + factors->formatVector(f1) + "\n";
+	return s;
+}
+

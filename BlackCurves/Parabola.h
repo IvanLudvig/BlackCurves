@@ -6,5 +6,6 @@ class Parabola :
 public:
 	Parabola(Factors* factors);
 	void build(Factors* factors, Cords cords) override;
+	std::string getDescription() override;
 };
 

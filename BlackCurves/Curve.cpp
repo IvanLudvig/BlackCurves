@@ -117,9 +117,15 @@ std::string Curve::getDescription()
 	std::string description = "";
 	description += "Type: " + stype +"\n";
 	if ((type == 1) || (type == 2) || (type == 3)) {
-		description += figure->canonic->getCanonicalDescription();
+		description += figure->canonic->getCanonicalDescription(type)+"\n";
+		description += figure->getDescription();
 	}
 	return description;
+}
+
+int Curve::getType()
+{
+	return type;
 }
 
 
