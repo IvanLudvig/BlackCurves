@@ -13,26 +13,12 @@ int sgn(float x)
 Curve::Curve(float A, float B, float C, float D, float E, float F, Cords cords)
 {
 	cs = new Factors(A, B, C, D, E, F);
-	//can = cs.canonic();
-	float I3 = (A * ((C * F) - (E * E / 4))) 
-		- ((B / 2) * ((B * F / 2) - (D * E / 4))) 
+	float I3 = (A * ((C * F) - (E * E / 4)))
+		- ((B / 2) * ((B * F / 2) - (D * E / 4)))
 		+ ((D / 2) * ((B * E / 4) - (C * D / 2)));
 	float I2 = (A * C) - (B * B / 4);
 	float I1 = A + C;
 	float K = (A * F) - (D * D / 4) + (C * F) - (E * E / 4);
-
-	/*
-TYPE:
-1 - ellipse
-2 - hyperbola
-3 - parabola
-4 - unreal ellipse (nothing)
-5 - point (pair of unreal intersecting lines)
-6 - intersecting lines
-7 - parallel lines
-8 - line
-9 - pair of unreal parallel lines
-*/
 
 	if (I2 > 0)
 	{
@@ -93,17 +79,12 @@ TYPE:
 	}
 }
 
-Curve::Curve(int a, int b, int type)
-{
-}
-
 void Curve::draw(sf::RenderWindow& window)
 {
 	if ((type == 1) || (type == 2) || (type == 3)) {
 		figure->draw(window);
 	}
 }
-
 
 void Curve::update(Cords cords)
 {
@@ -115,9 +96,9 @@ void Curve::update(Cords cords)
 std::string Curve::getDescription()
 {
 	std::string description = "";
-	description += "Type: " + stype +"\n";
+	description += "Type: " + stype + "\n";
 	if ((type == 1) || (type == 2) || (type == 3)) {
-		description += figure->canonic->getCanonicalDescription(type)+"\n";
+		description += figure->canonic->getCanonicalDescription(type) + "\n";
 		description += figure->getDescription();
 	}
 	return description;
@@ -127,5 +108,4 @@ int Curve::getType()
 {
 	return type;
 }
-
 

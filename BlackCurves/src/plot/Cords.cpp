@@ -43,6 +43,26 @@ void Cords::setCenter(sf::Vector2f v)
 	center = v;
 }
 
+void Cords::setScale(float newScale)
+{
+	scale = newScale;
+}
+
+void Cords::setZoom(float newZoom)
+{
+	zoom = newZoom;
+}
+
+float Cords::getZoom()
+{
+	return zoom;
+}
+
+float Cords::getScale()
+{
+	return scale;
+}
+
 float Cords::maxX()
 {
 	return ((topRight.x * zoom + toLocalCords(center).x));

@@ -32,7 +32,6 @@ void Ellipse::build(Factors* factors, Cords cords)
 		float b = (factors->B * x) + factors->E;
 		float C = factors->F + (factors->A * x * x) + (factors->D * x);
 		float D2 = (b * b) - (4 * a * C);
-		//std::cout << x <<" " << D2 << std::endl;
 		if (D2 >= 0)
 		{
 			float y1 = (-b + sqrt(D2)) / (2 * a);
@@ -44,19 +43,18 @@ void Ellipse::build(Factors* factors, Cords cords)
 			i++;
 		}
 	}
+
 	sf::VertexArray v = sf::VertexArray(sf::LinesStrip, (2 * i) + 1);
 	for (int j = 0; j < i; j++)
 	{
 		v[j] = v1[j];
-		//v[j + i].color = sf::Color::Black;
 	}
 	for (int j = 0; j < i; j++)
 	{
 		v[j + i] = v2[i - j - 1];
-		//v[j + i].color = sf::Color::Black;
 	}
-	if (pow(pow(abs(v1[0].position.y - v[(2 * i) - 1].position.y), 2)+ pow(abs(v1[0].position.x - v[(2 * i) - 1].position.x), 0.5), 2) < 
-		((cords.maxX()-cords.maxX())/10))
+	if (pow(pow(abs(v1[0].position.y - v[(2 * i) - 1].position.y), 2) + pow(abs(v1[0].position.x - v[(2 * i) - 1].position.x), 0.5), 2) <
+		((cords.maxX() - cords.maxX()) / 10))
 	{
 		v[2 * i] = v1[0];
 	}
@@ -73,7 +71,7 @@ std::string Ellipse::getDescription()
 {
 	std::string s = "";
 	sf::Vector2f center = canonic->toReal(sf::Vector2f(0, 0));
-	float c = pow((1/canonic->C) + (1/canonic->A), 0.5);
+	float c = pow((1 / canonic->C) + (1 / canonic->A), 0.5);
 	s += "a = " + factors->formatFloat(pow((1 / canonic->A), 0.5)) +
 		"\nb = " + factors->formatFloat(pow((1 / canonic->C), 0.5)) +
 		"\nc = " + factors->formatFloat(c) +

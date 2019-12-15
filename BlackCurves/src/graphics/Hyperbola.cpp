@@ -60,7 +60,8 @@ void Hyperbola::build(Factors* factors, Cords cords)
 				k++;
 			}
 
-		}else {
+		}
+		else {
 			t = 1;
 		}
 	}
@@ -96,9 +97,9 @@ std::string Hyperbola::getDescription()
 {
 	std::string s = "";
 	sf::Vector2f center = canonic->toReal(sf::Vector2f(0, 0));
-	float c = pow(pow(1/canonic->C, 2) + pow(1/canonic->A, 2), 0.5);
+	float c = pow(pow(1 / canonic->C, 2) + pow(1 / canonic->A, 2), 0.5);
 	s += "a = " + factors->formatFloat(pow((1 / canonic->A), 0.5)) +
-		"\nb = " + factors->formatFloat(pow((1 / canonic->C), 0.5)) +
+		"\nb = " + factors->formatFloat(pow(abs(1 / canonic->C), 0.5)) +
 		"\nc = " + factors->formatFloat(c) +
 		"\ne = " + factors->formatFloat(c / pow(canonic->A, 0.5)) +
 		"\n";

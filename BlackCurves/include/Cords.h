@@ -10,11 +10,17 @@ public:
 	static float radiansToDegrees(float rad);
 	static float Cords::degreesToRadians(float deg);
 	void setCenter(sf::Vector2f v);
+	void setScale(float newScale);
+	void setZoom(float newZoom);
+	float getZoom();
+	float getScale();
 	float maxX();
 	float minX();
 	float maxY();
 	float minY();
 	static const int R;
+
+private:
 	float scale;
 	float zoom;
 	sf::Vector2f topRight;

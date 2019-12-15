@@ -1,1 +1,35 @@
-﻿  BlackCurves.vcxproj -> C:\Users\vt\source\repos\BlackCurves\x64\Release\BlackCurves.exe
+﻿  uic src\BlackCurves.ui
+  rcc src\BlackCurves.qrc
+  moc include\BlackCurves.h
+   RCC: Warning: No resources in 'C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\BlackCurves.qrc'.
+  Axis.cpp
+  BlackCurves.cpp
+  Curve.cpp
+  Ellipse.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\Axis.cpp(1,10): fatal error C1083: Cannot open include file: 'Axis.h': No such file or directory
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\BlackCurves.cpp(1,10): fatal error C1083: Cannot open include file: 'BlackCurves.h': No such file or directory
+  Factors.cpp
+  Figure.cpp
+  Hyperbola.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Ellipse.cpp(1,10): fatal error C1083: Cannot open include file: 'Ellipse.h': No such file or directory
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Hyperbola.cpp(1,10): fatal error C1083: Cannot open include file: 'Hyperbola.h': No such file or directory
+  Line.cpp
+  LineFigure.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Factors.cpp(1,10): fatal error C1083: Cannot open include file: 'Factors.h': No such file or directory
+  Parabola.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Figure.cpp(1,10): fatal error C1083: Cannot open include file: 'Figure.h': No such file or directory
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Line.cpp(1,10): fatal error C1083: Cannot open include file: 'Line.h': No such file or directory
+  main.cpp
+  Cords.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\LineFigure.cpp(1,10): fatal error C1083: Cannot open include file: 'LineFigure.h': No such file or directory
+  Curves.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Parabola.cpp(1,10): fatal error C1083: Cannot open include file: 'Parabola.h': No such file or directory
+  Tick.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\plot\Cords.cpp(1,10): fatal error C1083: Cannot open include file: 'Cords.h': No such file or directory
+  qrc_BlackCurves.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\plot\Tick.cpp(1,10): fatal error C1083: Cannot open include file: 'Tick.h': No such file or directory
+  moc_BlackCurves.cpp
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\graphics\Curve.cpp(2,10): fatal error C1083: Cannot open include file: 'Curve.h': No such file or directory
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\main.cpp(2,10): fatal error C1083: Cannot open include file: 'BlackCurves.h': No such file or directory
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\src\plot\Curves.cpp(2,10): fatal error C1083: Cannot open include file: 'Curves.h': No such file or directory
+C:\Users\vt\source\repos\BlackCurves\BlackCurves\include\BlackCurves.h(9,10): fatal error C1083: Cannot open include file: 'Curves.h': No such file or directory (compiling source file x64\Release\\moc\include\moc_BlackCurves.cpp)

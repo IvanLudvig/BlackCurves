@@ -2,26 +2,6 @@
 #include "Curves.h"
 
 
-
-//Curve curve(0, 0, -2, 5 / 2, 20 / 2, 4, cords);
-//Curve curve(0.5, 0.2, 0.33, -152, -360, -27, cords); //ellipse
-//Curve curve(4, 28, 49, -3, -15, 2, cords);  //parabola
-//Curve curve(1, -2, 1, -2, -2, 1, cords);  //parabola
-//Curve curve(1, -8, 16, 6, -24, 9, cords);   //line
-//Curve curve(225, -240, 64, 30, -16, 1, cords);   //line
-//Curve curve(25, 0, 0, -30, 0, 9, cords);   //line
-//Curve curve(0, 0, 0, 15, -8, 1, cords);   //line
-//Curve curve(81, -36, 4, 0, 0, 0, cords);   //2 p lines
-//Curve curve(5, 0, -16, -6, 8, -144, cords);
-//Curve curve(9, 0, -16, -6, 8, -144, cords);
-//Curve curve(17, -9, 1, -3, -1, -3, cords);
-//Curve curve(17, -2, 1, -3, -1, -3, cords);
-//Curve curve(1, -8, 16, 6, -24, 9, cords);
-//Curve curve(5, 12, 10, -6, 4, -1, cords);  //ellipse
-//Curve curve(2, 6, 10, 0, 0, -121, cords);
-//Curve curve(2, -4, 5, 8, -2, 9, cords);
-
-
 Curves::Curves(float A, float B, float C, float D, float E, float F)
 {
 	cords = new Cords();
@@ -31,7 +11,7 @@ Curves::Curves(float A, float B, float C, float D, float E, float F)
 
 void Curves::update()
 {
-	cords->scale = 800 / ((cords->maxX() - cords->minX()) * cords->zoom);
+	cords->setScale(800 / ((cords->maxX() - cords->minX()) * cords->getZoom()));
 	curve->update(*cords);
 	axis->update(*cords);
 }
@@ -41,7 +21,7 @@ void Curves::open()
 	if ((curve->getType() != 1) && (curve->getType() != 2) && (curve->getType() != 3)) {
 		return;
 	}
-	sf::RenderWindow window(sf::VideoMode(1000, 600), "View", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(1000, 600), "Plot", sf::Style::Close);
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(60);
 
@@ -95,29 +75,20 @@ void Curves::open()
 					break;
 				if (event.mouseWheelScroll.delta <= -1)
 				{
-					cords->zoom = std::min(15.0f, cords->zoom + (cords->zoom / 10));
+					cords->setZoom(std::min(15.0f, cords->getZoom() + (cords->getZoom() / 10)));
 				}
 				else if (event.mouseWheelScroll.delta >= 1)
 				{
-					cords->zoom = std::max(.05f, cords->zoom - (cords->zoom / 10));
+					cords->setZoom(std::max(.05f, cords->getZoom() - (cords->getZoom() / 10)));
 				}
 				cords->setCenter(view.getCenter());
 				update();
 				break;
 			}
 
-
-		sf::VertexArray line(sf::Lines, 2);
-		line[0].position = sf::Vector2f(0, 0);
-		line[0].color = sf::Color(100, 0, 200);
-		line[1].position = sf::Vector2f(100, 100);
-		line[1].color = sf::Color(100, 0, 200);
-
 		window.clear(sf::Color::White);
 		axis->draw(window);
-		//window.draw(ellipse);
 		curve->draw(window);
-		//window.draw(text);
 		window.display();
 	}
 }

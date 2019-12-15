@@ -23,7 +23,6 @@ class Curve
 	*/
 public:
 	Curve(float A, float B, float C, float D, float E, float F, Cords cords);
-	Curve(int a, int b, int type);
 	void draw(sf::RenderWindow& window);
 	void update(Cords cords);
 	std::string getDescription();
@@ -32,8 +31,8 @@ public:
 private:
 	sf::ConvexShape fig;
 	sf::VertexArray vert1, vert2;
-	int type;
-	std::string stype;
-	Factors* cs;
 	Figure* figure;
+	Factors* cs;
+	std::string stype;
+	int type;
 };

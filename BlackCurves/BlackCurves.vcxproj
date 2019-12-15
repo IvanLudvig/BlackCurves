@@ -46,6 +46,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -104,13 +106,13 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories);C:\Users\vt\Documents\Projects\sfml\include;C:\Users\vt\Documents\Projects\thor\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories);C:\Users\vt\Documents\Projects\sfml\include;C:\Users\vt\Documents\Projects\thor\include;include/;lib/;C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);C:\Users\vt\Documents\Projects\sfml\lib;C:\Users\vt\Documents\Projects\thor\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);C:\Users\vt\Documents\Projects\sfml\lib;C:\Users\vt\Documents\Projects\thor\lib;lib/;C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(Qt_LIBS_);%(AdditionalDependencies);sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;thor-d.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -140,15 +142,15 @@
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories);C:\Users\vt\Documents\Projects\thor\include;C:\Users\vt\Documents\Projects\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories);C:\Users\vt\Documents\Projects\thor\include;C:\Users\vt\Documents\Projects\sfml\include;C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib</AdditionalIncludeDirectories>
       <SupportJustMyCode />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);C:\Users\vt\Documents\Projects\sfml\lib;C:\Users\vt\Documents\Projects\thor\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(Qt_LIBS_);%(AdditionalDependencies);sfml-graphics.lib;sfml-window.lib;sfml-system.lib;thor.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);C:\Users\vt\Documents\Projects\sfml\lib;C:\Users\vt\Documents\Projects\thor\lib;;C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(Qt_LIBS_);%(AdditionalDependencies);sfml-graphics.lib;sfml-window.lib;sfml-system.lib;thor.lib;C:\Users\vt\source\repos\BlackCurves\BlackCurves\lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -169,46 +171,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Axis.cpp" />
-    <ClCompile Include="BlackCurves.cpp" />
-    <ClCompile Include="Cords.cpp" />
-    <ClCompile Include="Curve.cpp" />
-    <ClCompile Include="Curves.cpp" />
-    <ClCompile Include="Ellipse.cpp" />
-    <ClCompile Include="Factors.cpp" />
-    <ClCompile Include="Figure.cpp" />
-    <ClCompile Include="Hyperbola.cpp" />
-    <ClCompile Include="Line.cpp" />
-    <ClCompile Include="LineFigure.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Parabola.cpp" />
-    <ClCompile Include="Tick.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="BlackCurves.h" />
-  </ItemGroup>
-  <ItemGroup>
     <QtUic Include="BlackCurves.ui" />
+    <QtUic Include="src\BlackCurves.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="BlackCurves.qrc" />
+    <ClInclude Include="include\Axis.h" />
+    <ClInclude Include="include\Cords.h" />
+    <ClInclude Include="include\Curve.h" />
+    <ClInclude Include="include\Curves.h" />
+    <ClInclude Include="include\Ellipse.h" />
+    <ClInclude Include="include\Factors.h" />
+    <ClInclude Include="include\Figure.h" />
+    <ClInclude Include="include\Hyperbola.h" />
+    <ClInclude Include="include\Line.h" />
+    <ClInclude Include="include\LineFigure.h" />
+    <ClInclude Include="include\Parabola.h" />
+    <QtMoc Include="include\BlackCurves.h" />
+    <ClInclude Include="include\Tick.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Axis.h" />
-    <ClInclude Include="Cords.h" />
-    <ClInclude Include="Curve.h" />
-    <ClInclude Include="Curves.h" />
-    <ClInclude Include="Ellipse.h" />
-    <ClInclude Include="Factors.h" />
-    <ClInclude Include="Figure.h" />
-    <ClInclude Include="Hyperbola.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="LineFigure.h" />
-    <ClInclude Include="Parabola.h" />
-    <ClInclude Include="Tick.h" />
+    <ClCompile Include="src\BlackCurves.cpp" />
+    <ClCompile Include="src\graphics\Curve.cpp" />
+    <ClCompile Include="src\graphics\Ellipse.cpp" />
+    <ClCompile Include="src\graphics\Factors.cpp" />
+    <ClCompile Include="src\graphics\Figure.cpp" />
+    <ClCompile Include="src\graphics\Hyperbola.cpp" />
+    <ClCompile Include="src\graphics\Line.cpp" />
+    <ClCompile Include="src\graphics\LineFigure.cpp" />
+    <ClCompile Include="src\graphics\Parabola.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\plot\Axis.cpp" />
+    <ClCompile Include="src\plot\Cords.cpp" />
+    <ClCompile Include="src\plot\Curves.cpp" />
+    <ClCompile Include="src\plot\Tick.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="..\..\..\..\Documents\Projects\Curves\vs\Curves\Curves\consolas.ttf" />
+    <Font Include="res\consolas.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="res\BlackCurves.qrc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

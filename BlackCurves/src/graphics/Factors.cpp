@@ -33,39 +33,7 @@ Factors* Factors::toCanonic()
 	float D = this->D;
 	float E = this->E;
 	float F = this->F;
-	/*
-	if (B == 0) {
-		if (A == 0)
-		{
-			if (D == 0)
-			{
-				if ((C != 0) && (E != 0))
-				{
-					float y1 = E / (2 * C);
-					F -= E * E / (4 * C);
-					center.y = y1;
-					E = 0;
-					return new Factors(A, B, C, D, E, F, angle, center);
-				}
-			}
-		}
-		if (C == 0)
-		{
-			if (E == 0)
-			{
-				if ((A != 0) && (D != 0))
-				{
-					float x1 = D / (2 * A);
-					F -= D * D / (4 * A);
-					//center.x = x1;
-					D = pow(A, 0.5f);
-					A = 0;
-					return new Factors(A, B, C, D, E, F, angle, center);
-				}
-			}
-		}
-	}*/
-	
+
 	if (B != 0)
 	{
 		if (A == C)
@@ -74,7 +42,7 @@ Factors* Factors::toCanonic()
 		}
 		else
 		{
-			angle = 0.5f * atan(B/(A - C));
+			angle = 0.5f * atan(B / (A - C));
 		}
 
 		A = A * cos(angle) * cos(angle);
@@ -90,27 +58,9 @@ Factors* Factors::toCanonic()
 		D += this->E * sin(angle);
 		E -= this->D * sin(angle);
 
-		B = 2*(this->C -this->A) * sin(angle) * cos(angle);
-		B += this->B*((cos(angle) * cos(angle)) - (sin(angle) * sin(angle)));
-		//B = 0;
+		B = 0;
 	}
 
-	/*
-	if (B != 0)
-	{
-		if ((D != 0) && (A != 0) && (C != 0) && (E != 0))
-		{
-			if (D  == (2 * F * (pow(A, 0.5f))))
-			{
-				D = (D / fabs(D)) * pow(A, 0.5f);
-				E = (E/fabs(E))*pow(C, 0.5f);
-				A = 0;
-				C = 0;
-				B = 0;
-			}
-		}
-	}*/
-	
 	if ((A != 0) && (D != 0))
 	{
 		float x1 = D / (2 * A);
@@ -125,8 +75,8 @@ Factors* Factors::toCanonic()
 		center.y = -y1;
 		E = 0;
 	}
-	
-	
+
+
 	if (A > C)
 	{
 		float t = A;
@@ -137,18 +87,13 @@ Factors* Factors::toCanonic()
 		E = t;
 		angle1 = Cords::degreesToRadians(90);
 	}
-	/*
-	if (B != 0)
+
+	if ((A == 0) && (C != 0) && (D != 0) && (E == 0) && (F == 0))
 	{
-		if ((D == 0) && (E == 0))
-		{
-			D = pow(abs(A), 0.5f);
-			E = pow(abs(C), 0.5f);
-			A = 0;
-			C = 0;
-			//B -= 2*D*E;
-		}
-	}*/
+		D = D / C;
+		C = 1;
+	}
+
 
 	if (F != 0)
 	{
@@ -189,7 +134,7 @@ std::string Factors::floatSign(float n)
 
 std::string Factors::formatVector(sf::Vector2f v)
 {
-	return "("+formatFloat(v.x)+", "+formatFloat(v.y)+")";
+	return "(" + formatFloat(v.x) + ", " + formatFloat(v.y) + ")";
 }
 
 std::string Factors::formatFloatwithSign(float n)
@@ -207,26 +152,17 @@ std::string Factors::getCanonicalDescription(int type)
 	std::setprecision(5);
 	std::string description = "";
 
-	if((type==1)||(type==2))
+	if ((type == 1) || (type == 2))
 	{
 		description += " x^2/" + formatFloat(1 / A) + " ";
 		description += floatSign(1 / C) + " y^2/" + formatFloat(abs(1 / C)) + " ";
 		description += "= " + formatFloat(-F);
 	}
-	else if(type==3)
+	else if (type == 3)
 	{
 		description += "y = ";
-		description += "2*" + formatFloat(-D / 2) + " x\n";
+		description += "2*" + formatFloat(-D / 2) + " x";
 	}
-	
-	/*
-	description += "Canonical equation: ";
-	description += A==0? "" : formatFloat(A)+" x^2/  ";
-	description += B==0? "" : formatFloatwithSign(B)+" xy ";
-	description += C==0? "" : formatFloatwithSign(C)+" y^2 ";
-	description += D==0? "" : formatFloatwithSign(D)+" x ";
-	description += E==0? "" : formatFloatwithSign(E)+" y ";
-	description += F==0? "" : " = "+ formatFloat(-F);
-	*/
+
 	return description;
 }
